@@ -16,4 +16,8 @@ public class EmployeeServices {
     public Object create(Employee employee) {
         return employeeRepository.create(employee);
     }
+
+    public Object update(int id, Employee employee) {
+        return employeeRepository.update(id, employee);
+    }
 }

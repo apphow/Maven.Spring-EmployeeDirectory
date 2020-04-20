@@ -21,7 +21,7 @@ public class DepartmentController {
         this.departmentService = departmentService;
     }
 
-    @PostMapping("/department")
+    @PostMapping("/API/department")
     public ResponseEntity<Department> create(@RequestBody Department department) {
         return new ResponseEntity<Department>((Department) departmentService.create(department), HttpStatus.CREATED);
     }
