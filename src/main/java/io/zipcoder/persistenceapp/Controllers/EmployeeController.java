@@ -7,7 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
+@RequestMapping(path="/API")
 public class EmployeeController {
 
     private  EmployeeServices employeeService;
@@ -23,12 +26,27 @@ public class EmployeeController {
     }
 
     @PutMapping("/API/employee/{number}")
-    public ResponseEntity<Employee> update(@PathVariable int id, @RequestBody Employee employee) {
-        return new ResponseEntity<Employee>((Employee) employeeService.update(id, employee), HttpStatus.OK);
+    public ResponseEntity<Employee> update(@PathVariable int number, @RequestBody Employee employee) {
+        return new ResponseEntity<Employee>((Employee) employeeService.update(number, employee), HttpStatus.OK);
     }
 
     @PutMapping("/API/setManager")
-    public ResponseEntity<Employee> updateManager(@RequestBody Employee employee) {
-        return null;
+    public ResponseEntity<Employee> updateManager(@PathVariable int employeeNumber, @RequestParam int managerId) {
+        return new ResponseEntity<Employee>((Employee) employeeService.updateManager(employeeNumber, managerId), HttpStatus.OK);
+    }
+
+    @PutMapping("/API/updateTitle")
+    public ResponseEntity<Employee> updateTitle(@PathVariable int employeeNumber, @RequestBody String title) {
+        return new ResponseEntity<Employee>((Employee) employeeService.updateTitle(employeeNumber, title), HttpStatus.OK);
+}
+
+    @GetMapping("/employees")
+    public List<Employee> getEmployeeList() { return (List<Employee>) employeeService.findAll();}
+
+
+    @DeleteMapping("/employee/{number}")
+    public ResponseEntity<Employee> delete(@PathVariable int number) {
+        employeeService.delete(number);
+        return ResponseEntity.ok().build();
     }
 }

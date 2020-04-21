@@ -18,12 +18,13 @@ public class Employee {
     String phoneNumber;
     String email;
     String hireDate;
-    String Manger;
+    int managerId;
+    private Object Manager;
 
     public Employee() {
     }
 
-    public Employee(int departmentNumber, int number, String firstName, String lastName, String title, String phoneNumber, String email, String hireDate, String manger) {
+    public Employee(int departmentNumber, int number, String firstName, String lastName, String title, String phoneNumber, String email, String hireDate, int manger) {
         this.departmentNumber = departmentNumber;
         this.number = number;
         this.firstName = firstName;
@@ -32,7 +33,7 @@ public class Employee {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.hireDate = hireDate;
-        Manger = manger;
+        this.managerId = manger;
     }
 
     public int getDepartmentNumber() {
@@ -100,11 +101,11 @@ public class Employee {
     }
 
     public String getManger() {
-        return Manger;
+        return (String) Manager;
     }
 
-    public void setManger(String manger) {
-        Manger = manger;
+    public void setManger(int manger) {
+        Manager = manger;
     }
 }
 

@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EmployeeRepository extends CrudRepository<Employee, Integer> {
-    public Object save(Employee employee);
+    Employee findByEmployeeNumber(int employeeNumber);
 }
