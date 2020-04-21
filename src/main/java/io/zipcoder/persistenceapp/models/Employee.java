@@ -1,5 +1,7 @@
 package io.zipcoder.persistenceapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 //https://examples.javacodegeeks.com/enterprise-java/jpa/jpa-relationship-annotations-example/
@@ -8,7 +10,7 @@ import javax.persistence.*;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int employeeNumber;
     String firstName;
     String lastName;
@@ -18,12 +20,12 @@ public class Employee {
     String hireDate;
     int managerId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="managerId")
+    @JsonIgnore
+    @OneToOne
     private Employee manager;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="departmentNumber")
+    @JsonIgnore
+    @ManyToOne
     private Department departmentNumber;
     private Object Manager;
 

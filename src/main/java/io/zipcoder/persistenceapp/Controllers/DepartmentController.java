@@ -5,10 +5,9 @@ import io.zipcoder.persistenceapp.models.Department;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 public class DepartmentController {
 
 
@@ -33,7 +32,4 @@ public class DepartmentController {
     public  ResponseEntity<Department> updateDepartmentName(@PathVariable int departmentNumber, @RequestBody String departmentName){
         return new ResponseEntity<Department>(departmentService.changeDepartmentName(departmentNumber, departmentName), HttpStatus.OK);
     }
-
-
-
 }

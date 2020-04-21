@@ -1,5 +1,7 @@
 package io.zipcoder.persistenceapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
@@ -18,6 +20,7 @@ public class Department implements Serializable{
     public Department() {
     }
 
+    @JsonIgnore
     @OneToMany(mappedBy = "department")
     private Collection<Employee> employee;
 
