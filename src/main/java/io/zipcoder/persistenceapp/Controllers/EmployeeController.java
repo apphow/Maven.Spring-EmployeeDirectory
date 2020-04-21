@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path="/API")
 public class EmployeeController {
 
     private  EmployeeServices employeeService;
@@ -41,7 +40,7 @@ public class EmployeeController {
 }
 
     @GetMapping("/employees")
-    public List<Employee> getEmployeeList() { return (List<Employee>) employeeService.findAll();}
+    public List<Employee> findAll() { return (List<Employee>) employeeService.findAll();}
 
 
     @DeleteMapping("/employee/{number}")

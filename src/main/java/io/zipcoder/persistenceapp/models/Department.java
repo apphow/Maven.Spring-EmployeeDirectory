@@ -1,17 +1,25 @@
 package io.zipcoder.persistenceapp.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Collection;
 
 @Entity
-public class Department {
+public class Department implements Serializable{
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     int departmentNumber;
     String departmentName;
     String departmentManager;
 
-    public Department(){}
+    //Unidirectional. Employee has a ManyToOne relationship with the Deprment
+
+    public Department() {
+    }
+
+    @OneToMany(mappedBy = "department")
+    private Collection<Employee> employee;
 
     public Department(int departmentNumber, String departmentName, String departmentManager) {
         this.departmentNumber = departmentNumber;
@@ -41,5 +49,17 @@ public class Department {
 
     public void setDepartmentManager(String departmentManager) {
         this.departmentManager = departmentManager;
+    }
+
+    public Collection<Employee> getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Collection<Employee> employee) {
+        this.employee = employee;
+    }
+
+    public Object save(Department department) {
+        return department;
     }
 }

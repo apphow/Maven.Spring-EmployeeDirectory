@@ -1,17 +1,15 @@
 package io.zipcoder.persistenceapp.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+//https://examples.javacodegeeks.com/enterprise-java/jpa/jpa-relationship-annotations-example/
+//https://docs.oracle.com/javaee/6/api/javax/persistence/OneToMany.html
 @Entity
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int departmentNumber;
-    int number;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int employeeNumber;
     String firstName;
     String lastName;
     String title;
@@ -19,14 +17,18 @@ public class Employee {
     String email;
     String hireDate;
     int managerId;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="managerId")
+    private Employee manager;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="departmentNumber")
+    private Department departmentNumber;
     private Object Manager;
 
-    public Employee() {
-    }
-
-    public Employee(int departmentNumber, int number, String firstName, String lastName, String title, String phoneNumber, String email, String hireDate, int manger) {
-        this.departmentNumber = departmentNumber;
-        this.number = number;
+    public Employee(int departmentNumber, String firstName, String lastName, String title, String phoneNumber, String email, String hireDate, int manger) {
+        this.employeeNumber = employeeNumber;
         this.firstName = firstName;
         this.lastName = lastName;
         this.title = title;
@@ -36,20 +38,12 @@ public class Employee {
         this.managerId = manger;
     }
 
-    public int getDepartmentNumber() {
-        return departmentNumber;
+    public Employee(){
+        managerId = 0;
     }
 
-    public void setDepartmentNumber(int departmentNumber) {
-        this.departmentNumber = departmentNumber;
-    }
-
-    public int getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
+    public Employee(int managerId) {
+        this.managerId = managerId;
     }
 
     public String getFirstName() {
@@ -100,12 +94,28 @@ public class Employee {
         this.hireDate = hireDate;
     }
 
-    public String getManger() {
+    public String getManager() {
         return (String) Manager;
     }
 
-    public void setManger(int manger) {
-        Manager = manger;
+    public void setManager(String manager) {
+        this.Manager = manager;
+    }
+
+    public int getManagerId() {
+        return (int) getManagerId();
+    }
+
+    public void setManagerId(int managerId) {
+        this.managerId = managerId;
+    }
+
+    public int getEmployeeNumber() {
+        return (int) employeeNumber;
+    }
+
+    public void setEmployeeNumber(int employeeNumber) {
+        this.employeeNumber = employeeNumber;
     }
 }
 

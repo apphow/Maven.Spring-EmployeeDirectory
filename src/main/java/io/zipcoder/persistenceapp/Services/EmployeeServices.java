@@ -10,8 +10,9 @@ import java.util.Optional;
 @Service
 public class EmployeeServices {
 
-    EmployeeRepository employeeRepository;
     @Autowired
+    EmployeeRepository employeeRepository;
+
     public void EmployeeService(EmployeeRepository employeeRepository) { this.employeeRepository = employeeRepository;}
 
     public Employee findByEmployeeNumber(int employeeNumber){return employeeRepository.findByEmployeeNumber(employeeNumber);}
@@ -29,10 +30,9 @@ public class EmployeeServices {
         return existing;
     }
 
-
-    public Employee updateManager(int employeeNumber, int newManager ) {
+    public Employee updateManager(int employeeNumber, int ManagerId ) {
         Employee e = findByEmployeeNumber(employeeNumber);
-        e.setManger(newManager);
+        e.setManagerId(ManagerId);
         return employeeRepository.save(e);
     }
 

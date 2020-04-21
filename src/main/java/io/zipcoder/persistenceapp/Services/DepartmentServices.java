@@ -7,9 +7,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DepartmentServices {
-    private static DepartmentRepository departmentRepository;
 
     @Autowired
+    DepartmentRepository departmentRepository;
+
+    @Autowired
+    EmployeeServices employeeService;
+
     public void DepartmentServices(DepartmentRepository departmentRepository) { this.departmentRepository = departmentRepository;}
 
 
@@ -20,7 +24,7 @@ public class DepartmentServices {
     public Department findByDepartmentNumber(int departmentNumber){return departmentRepository(findByDepartmentNumber(departmentNumber));}
 
     public static Department save(Department department) {
-        return (Department) departmentRepository.save(department);
+        return (Department) department.save(department);
     }
 
     public Object create(Department department) {

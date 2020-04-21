@@ -9,8 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/department")
 public class DepartmentController {
+
 
     private DepartmentServices departmentService;
 
