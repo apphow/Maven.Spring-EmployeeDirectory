@@ -93,9 +93,7 @@ public class Employee {
         this.hireDate = hireDate;
     }
 
-    public String getManager() {
-        return (String) Manager;
-    }
+    public String getManager() { return (String) Manager; }
 
     public void setManager(String manager) {
         this.Manager = manager;
