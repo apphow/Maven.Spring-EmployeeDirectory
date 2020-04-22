@@ -18,6 +18,7 @@ public class Employee {
     String hireDate;
     int managerId;
 
+
     @OneToOne
     private Employee manager;
 
@@ -25,7 +26,7 @@ public class Employee {
     private Department departmentNumber;
     private Object Manager;
 
-    public Employee(int departmentNumber, String firstName, String lastName, String title, String phoneNumber, String email, String hireDate, int manger) {
+    public Employee(int employeeNumber, int departmentNumber, String firstName, String lastName, String title, String phoneNumber, String email, String hireDate, int manger) {
         this.employeeNumber = employeeNumber;
         this.firstName = firstName;
         this.lastName = lastName;

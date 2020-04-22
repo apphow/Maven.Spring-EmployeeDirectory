@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 
 
@@ -55,34 +56,61 @@ public class EmployeeServicesTest {
 
     @Test
     public void create() {
-        Employee e = new Employee(3, "Chelsea", "Bott", "Doctor", "415-228-7836", "che@gmail.com", "May 15, 2019", 33);
+        Employee e = new Employee(3, 3, "Chelsea", "Bott", "Doctor", "415-228-7836", "che@gmail.com", "May 15, 2019", 33);
         Mockito.when(employeeRepository.findByEmployeeNumber(3)).thenReturn(e);
         Assert.assertEquals(e, employeeServices.findByEmployeeNumber(3));
     }
 
     @Test
     public void update() {
-        int eid = 1;
-        Employee e = new Employee();
+        Employee e = new Employee(3, 3, "Chelsea", "Bott", "Doctor", "415-228-7836", "che@gmail.com", "May 15, 2019", 33);
 
-        e.setEmail("me@gmail.com");
+        e.setLastName("Friar");
 
-        when(employeeRepository.findByEmployeeNumber(eid)).thenReturn(e);
+        Mockito.when(employeeRepository.findByEmployeeNumber(3)).thenReturn(e);
+        Mockito.when(employeeRepository.save((Employee) any())).thenReturn(e);
 
-        Assert.assertEquals(e.getEmail(), "me@gmail.com");
+        e = (Employee) employeeServices.update(3, e);
+        Assert.assertEquals("Friar", e.getLastName());
+
+
     }
 
 
     @Test
     public void updateManager() {
+        Employee e = new Employee();
+        e.setEmployeeNumber(3);
+        e.setManager("John Smith");
+
+        Mockito.when(employeeRepository.findByEmployeeNumber(3)).thenReturn(e);
+        Mockito.when(employeeRepository.save((Employee) any())).thenReturn(e);
+
+        e = (Employee) employeeServices.updateManager(3,10);
+        Assert.assertEquals("John Smith", e.getManager());
 
     }
 
     @Test
     public void updateTitle() {
-    }
+        Employee e = new Employee();
+        e.setEmployeeNumber(3);
+        e.setTitle("Boss");
+        e.setTitle("President");
 
+        Mockito.when(employeeRepository.findByEmployeeNumber(3)).thenReturn(e);
+        Mockito.when(employeeRepository.save((Employee) any())).thenReturn(e);
+
+        e = (Employee) employeeServices.updateTitle(3, e.getTitle());
+        Assert.assertEquals("President", e.getTitle());
+
+    }
     @Test
     public void delete() {
+        int employeeNumber = 10;
+        Employee e = new Employee();
+        e.setEmployeeNumber(employeeNumber);
+        Mockito.when(employeeRepository.findByEmployeeNumber(employeeNumber)).thenReturn(e);
+        Assert.assertEquals(e, employeeServices.delete(employeeNumber));
     }
 }

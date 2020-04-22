@@ -18,6 +18,7 @@ public class EmployeeServices {
     public Employee findByEmployeeNumber(int employeeNumber){return employeeRepository.findByEmployeeNumber(employeeNumber);}
 
     public Iterable<Employee> findAll() { return employeeRepository.findAll();}
+
     public Employee create(Employee employee) {
         return employeeRepository.save(employee);
     }
