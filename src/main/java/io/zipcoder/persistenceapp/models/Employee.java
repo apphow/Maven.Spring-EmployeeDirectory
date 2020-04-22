@@ -1,7 +1,5 @@
 package io.zipcoder.persistenceapp.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 //https://examples.javacodegeeks.com/enterprise-java/jpa/jpa-relationship-annotations-example/
@@ -20,11 +18,9 @@ public class Employee {
     String hireDate;
     int managerId;
 
-    @JsonIgnore
     @OneToOne
     private Employee manager;
 
-    @JsonIgnore
     @ManyToOne
     private Department departmentNumber;
     private Object Manager;

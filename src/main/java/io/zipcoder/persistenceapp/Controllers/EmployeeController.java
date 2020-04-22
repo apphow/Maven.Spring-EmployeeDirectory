@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/API")
+@RequestMapping("/API/employee")
 public class EmployeeController {
 
     private  EmployeeServices employeeService;
